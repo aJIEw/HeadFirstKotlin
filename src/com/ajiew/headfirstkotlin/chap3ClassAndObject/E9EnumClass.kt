@@ -5,6 +5,9 @@ package com.ajiew.headfirstkotlin.chap3ClassAndObject
  * https://www.kotlincn.net/docs/reference/enum-classes.html
  * */
 
+/**
+ * 枚举常量还实现了 Comparable 接口， 其中自然顺序是它们在枚举类中定义的顺序。
+ * */
 enum class Direction {
     NORTH, SOUTH, WEST, EAST
 }
@@ -50,5 +53,12 @@ object EnumClass {
         for (v in Direction.values()) {
             println("= $v")
         }
+
+        println(ProtocolState.WAITING.signal())
+        println(ProtocolState.TALKING.signal())
+
+        // Enum 常量默认实现了 Comparable 接口，可以使用 compareTo 进行比较，其中的顺序是定义的顺序
+        println(Direction.SOUTH.compareTo(Direction.EAST))
+        println(Direction.SOUTH.compareTo(Direction.NORTH))
     }
 }

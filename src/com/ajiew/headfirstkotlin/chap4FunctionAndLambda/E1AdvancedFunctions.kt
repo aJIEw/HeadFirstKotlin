@@ -57,6 +57,8 @@ fun main() {
     items.fold(0, {
         // 如果一个 lambda 表达式有参数，前面是参数，后跟“->”
             acc: Int, i: Int ->
+
+        // 下面是函数主体
         print("acc = $acc, i = $i, ")
         val result = acc + i
         println("result = $result")

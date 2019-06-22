@@ -1,5 +1,8 @@
 package com.ajiew.headfirstkotlin.chap3ClassAndObject
 
+import com.sun.org.apache.bcel.internal.generic.NEW
+import kotlin.random.Random
+
 /**
  * 泛型
  * https://www.kotlincn.net/docs/reference/generics.html
@@ -14,8 +17,15 @@ interface Source<out T> {
     fun nextT(): T
 }
 
+class Origin : Source<String> {
+    override fun nextT(): String {
+        return "S" + Random(1).nextInt(100, 999)
+    }
+}
+
 fun demo(strs: Source<String>) {
     val objects: Source<Any> = strs // 这个没问题，因为 T 是一个 out-参数
+    println(objects.nextT())
 }
 
 /**
@@ -35,6 +45,6 @@ object Generics {
 
     @JvmStatic
     fun main(args: Array<String>) {
-
+        demo(Origin())
     }
 }

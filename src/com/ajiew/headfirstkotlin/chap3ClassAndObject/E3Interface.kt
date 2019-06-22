@@ -10,18 +10,18 @@ package com.ajiew.headfirstkotlin.chap3ClassAndObject
  * */
 interface MyInterface {
 
-    val prop: Int // 抽象的
+    val prop: Int // 抽象的，子类必须实现，或者提供访问器
 
     fun bar()
     fun foo() {
-        // 可选的方法体
+        // 可选的方法体，如果有方法体则子类不用必须实现
         println("foo in MyInterface")
     }
 }
 
 class MyInterfaceImpl : MyInterface {
 
-    override val prop: Int = 29 // 子类必需复写抽象属性
+    override val prop: Int = 29 // 子类必须复写抽象属性
 
     override fun bar() {
         // 方法体
@@ -48,12 +48,15 @@ interface Person : Named {
     val firstName: String
     val lastName: String
 
-    // 实现了访问器之后子类就不必复习该抽象属性了
+    // 实现了访问器之后子类就不必复写该抽象属性了
     override val name: String get() = "$firstName $lastName"
 }
 
+/**
+ * 主构造函数中覆写父类中的变量
+ * */
 data class Employee(
-    // 不必实现“name”
+    // 不必实现“name”，因为父类已经提供了访问器
     override val firstName: String,
     override val lastName: String
 ) : Person
@@ -62,20 +65,30 @@ data class Employee(
  * 下面演示 Kotlin 中同一个方法继承多个实现的问题
  * */
 interface A {
-    fun foo() { print("A") }
+    fun foo() {
+        print("A")
+    }
+
     fun bar()
 }
 
 interface B {
-    fun foo() { print("B") }
-    fun bar() { print("bar") }
+    fun foo() {
+        print("B")
+    }
+
+    fun bar() {
+        print("bar")
+    }
 }
 
 /**
  * C 继承 A，只要实现非抽象类方法 bar() 就可以了
  * */
 class C : A {
-    override fun bar() { print("bar") }
+    override fun bar() {
+        print("bar")
+    }
 }
 
 /**
@@ -89,8 +102,7 @@ class D : A, B {
     }
 
     override fun bar() {
-        super<B>.bar() // 由于只有 B 实现了 bar，所以只能调用 B 中的实现
-        // same as super.bar()
+        super<B>.bar() // 由于只有 B 实现了 bar，所以只能调用 B 中的实现，等同于 super.bar()
     }
 }
 
@@ -98,7 +110,7 @@ class D : A, B {
 object Interface {
 
     @JvmStatic
-    fun main(args: Array<String>){
+    fun main(args: Array<String>) {
         val impl = MyInterfaceImpl()
         println("Calling foo()=>")
         impl.foo()

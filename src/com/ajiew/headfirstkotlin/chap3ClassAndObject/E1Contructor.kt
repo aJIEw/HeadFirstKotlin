@@ -8,7 +8,7 @@ package com.ajiew.headfirstkotlin.chap3ClassAndObject
 /**
  * 声明类属性可以直接在主构造函数中添加 val 或 var，并且可以省略 constructor 关键字，只要没有注解或者可见性修饰符
  * */
-class People(val name: String){
+open class People(val name: String){
 
     /**
      * 初始代码块中的代码会在次构造函数之前执行

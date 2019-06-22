@@ -59,12 +59,12 @@ class AnonymousObject {
 }
 
 /**
- * object 后跟一个名称，这称为『对象声明』，生成的对象称为 named object，默认是单例的
+ * object 后跟一个名称，这称为『对象声明』，生成的对象称为 named object，默认是单例的，而且是线程安全的
  * */
 object Objects {
 
     fun someFun() {
-        println("do something here")
+        println("someFun() do something here")
     }
 
     @JvmStatic
@@ -83,5 +83,7 @@ object Objects {
 
 
         someFun()
+
+        another.someFun()
     }
 }

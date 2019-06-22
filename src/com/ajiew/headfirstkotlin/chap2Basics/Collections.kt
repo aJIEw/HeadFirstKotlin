@@ -1,9 +1,23 @@
-package com.ajiew.headfirstkotlin.chap6Other
+package com.ajiew.headfirstkotlin.chap2Basics
+
 
 /**
  * 集合
  * https://www.kotlincn.net/docs/reference/collections.html
  * */
+fun main() {
+    showList()
+
+    showCoherent()
+
+    listUtilFunctions()
+
+    showSet()
+
+    showMap()
+
+    testCollection()
+}
 
 var shapes: List<Shape> = listOf(Rectangle("Desk"))
 
@@ -14,21 +28,24 @@ var mutableShapes: MutableList<Shape> = mutableListOf(Rectangle("Tablet"))
  * 改变 list 的方法是由 MutableList<T> 加入的
  * */
 fun showList() {
+    println("--------------------------showList--------------------------")
     val numbers: MutableList<Int> = mutableListOf(1, 2, 3)
-    /* Mutable 可读可写 */
+    /* MutableList 可读可写 */
     println(numbers)
     numbers[0] = 10
     numbers.clear()
 
-    val readOnlyNumbers: List<Int> = listOf(1, 2, 3) // 用 array list 实现
+    val readOnlyNumbers: List<Int> = listOf(1, 2, 3) // 用 List 实现，List 是只读的
     // readOnlyNumbers[2] = 20 // 无法编译
     // readOnlyNumbers.clear() // 无法编译
+    println(readOnlyNumbers)
 }
 
 /**
  * 对于 List 来说协变是允许的，但是 MutableList 不是
  * */
 fun showCoherent() {
+    println("--------------------------showCoherent--------------------------")
     val circles: List<Circle> = listOf(Circle("Sun"))
 
     shapes = circles
@@ -52,6 +69,7 @@ fun showCoherent() {
  * List 有很多有用的扩展方法值得熟悉
  * */
 fun listUtilFunctions() {
+    println("--------------------------listUtilFunctions--------------------------")
     /**
      * 获取快照，toList 只是复制列表项，因此返回的 list 保证永远不会改变
      * */
@@ -63,7 +81,7 @@ fun listUtilFunctions() {
 
     shapes.last()
 
-    shapes.subList(0 ,1)
+    shapes.subList(0, 1)
 
     shapes.requireNoNulls() // 获取所有非空元素
 
@@ -78,6 +96,7 @@ fun listUtilFunctions() {
  * set 一些常用方法的示例
  * */
 fun showSet() {
+    println("--------------------------showSet--------------------------")
     val set = setOf(11, 22, 11, 24)
 
     println(set)
@@ -93,9 +112,10 @@ fun showSet() {
  * map 一些常用方法的示例
  * */
 fun showMap() {
+    println("--------------------------showMap--------------------------")
     val map = mapOf("one" to 1, "two" to 2, "three" to 3, 4 to "four")
 
-    println(map[4])
+    println("map[4] = ${map[4]}")
 
     /**
      * 解构赋值
@@ -105,16 +125,20 @@ fun showMap() {
     }
 }
 
-fun main() {
-    showList()
+fun testCollection() {
+    println("--------------------------testCollection--------------------------")
+    val firstShape = shapes[0]
+    println("firstShape: $firstShape")
 
-    showCoherent()
+    val last = shapes.last()
+    println("shapes.lastIndex = ${shapes.lastIndex}, last = $last")
 
-    listUtilFunctions()
+    val subList = shapes.subList(0, shapes.size)
+    println("subList: $subList")
 
-    showSet()
-
-    showMap()
+    for (shape in shapes) {
+        println(shape)
+    }
 }
 
 open class Shape(val name: String) {

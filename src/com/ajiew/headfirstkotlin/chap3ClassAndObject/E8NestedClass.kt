@@ -2,7 +2,7 @@ package com.ajiew.headfirstkotlin.chap3ClassAndObject
 
 
 /**
- * 嵌套类
+ * 嵌套类与内部类
  * https://www.kotlincn.net/docs/reference/nested-classes.html
  * */
 
@@ -22,6 +22,10 @@ class Outer {
      * */
     class Nested {
         fun foo(): String = "nested"
+
+        fun bar() {
+//            println(bar) // 嵌套类不能访问外部类中的 bar
+        }
     }
 
     /**
@@ -29,6 +33,10 @@ class Outer {
      * */
     inner class Inner {
         fun foo() = bar
+
+        fun bar() {
+            println(bar) // 可以访问 bar
+        }
     }
 
     fun addListener(listener: NestedListener) {
@@ -61,5 +69,7 @@ object NestedClass {
 
             }
         })
+
+        outer.Inner().bar()
     }
 }

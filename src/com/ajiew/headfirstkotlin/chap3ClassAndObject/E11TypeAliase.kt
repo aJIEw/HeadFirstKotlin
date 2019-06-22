@@ -1,4 +1,4 @@
-package com.ajiew.headfirstkotlin.chap6Other
+package com.ajiew.headfirstkotlin.chap3ClassAndObject
 
 import java.io.File
 
@@ -20,17 +20,18 @@ typealias FileTable<K> = MutableMap<K, MutableList<File>>
  * */
 typealias MyHandler = (Int, String, Any) -> Unit
 
-class A {
+class AA {
     inner class Inner
 }
 
 /**
  * 为内部类和嵌套类创建新名称
  * */
-typealias AInner = A.Inner
+typealias AInner = AA.Inner
 
 fun main() {
     val f: FileTable<String> = mutableMapOf("Key" to mutableListOf(File("Key.file")))
+    println(f)
 }
 
 

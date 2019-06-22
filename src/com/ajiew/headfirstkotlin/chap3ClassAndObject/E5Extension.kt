@@ -52,14 +52,14 @@ object Extension {
      * 扩展声明为成员
      * */
     class A {
-        fun bar() {  }
+        fun bar() {}
     }
 
     /**
      * 在一个类内部你可以为另一个类声明扩展
      * */
     class B {
-        fun baz() {  }
+        fun baz() {}
 
         /**
          * 此时 B 是 分发接收者，A 是 扩展接收者
@@ -74,10 +74,16 @@ object Extension {
         }
     }
 
-    open class D { }
+    /**
+     * 扩展接收者
+     * */
+    open class D
 
-    class D1 : D() { }
+    class D1 : D()
 
+    /**
+     * 分发接收者
+     * */
     open class C {
         open fun D.foo() {
             println("D.foo in C")
@@ -117,7 +123,7 @@ object Extension {
 
 open class ExtensionA
 
-class ExtensionB: ExtensionA()
+class ExtensionB : ExtensionA()
 
 fun ExtensionA.foo() = "ExtensionA"
 

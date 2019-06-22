@@ -1,7 +1,7 @@
 package com.ajiew.headfirstkotlin.chap3ClassAndObject
 
 /**
- * 伴生对象
+ * 伴生对象，可以直接引用，相当于静态内部类
  * https://www.kotlincn.net/docs/reference/object-declarations.html#%E4%BC%B4%E7%94%9F%E5%AF%B9%E8%B1%A1
  * */
 

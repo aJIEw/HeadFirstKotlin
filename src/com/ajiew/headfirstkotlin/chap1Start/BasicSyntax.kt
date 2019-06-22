@@ -34,14 +34,14 @@ object BasicSyntax {
      * */
     @JvmStatic
     fun main(args: Array<String>) {
-    // 以上等同于
-    // fun main(vararg args: String) { // vararg means variable arguments 即 Java 中的可变参数列表
+        // 以上等同于
+        // fun main(vararg args: String) { // vararg means variable arguments 即 Java 中的可变参数列表
         out()
 
         // this is line comment
         val str = "123456"
 
-        val nullable : Int?
+        val nullable: Int?
 //        println(nullable) // 无法打印，因为未被初始化
         nullable = 666
         println(nullable)
@@ -78,6 +78,8 @@ object BasicSyntax {
         useDownto()
 
         useCollection()
+
+        useDataClass()
 
         val w = Whatever()
         println(w.half)
@@ -162,5 +164,6 @@ object BasicSyntax {
 
     fun useDataClass() {
         val customer = Customer("aaron", "kevin10tod@gmail.com")
+        println("Customer: name = ${customer.name}, email = ${customer.email}")
     }
 }
