@@ -10,7 +10,7 @@ package com.ajiew.headfirstkotlin.chap3ClassAndObject
  * */
 interface MyInterface {
 
-    val prop: Int // 抽象的，子类必须实现，或者提供访问器
+    val prop: Int // 抽象的，父类不能实现，子类必须实现，或者提供访问器
 
     fun bar()
     fun foo() {
@@ -66,7 +66,7 @@ data class Employee(
  * */
 interface A {
     fun foo() {
-        print("A")
+        println("foo in A")
     }
 
     fun bar()
@@ -74,26 +74,26 @@ interface A {
 
 interface B {
     fun foo() {
-        print("B")
+        println("foo in B")
     }
 
     fun bar() {
-        print("bar")
+        println("bar in B")
     }
 }
 
 /**
  * C 继承 A，只要实现非抽象类方法 bar() 就可以了
  * */
-class C : A {
+open class C : A {
     override fun bar() {
-        print("bar")
+        println("bar in C")
     }
 }
 
 /**
  * D 继承 A 和 B，继承 foo() 方法时会同时获得两个父类中不同的实现
- *
+ * 使用 super<父类名> 区分
  * */
 class D : A, B {
     override fun foo() {
@@ -106,6 +106,24 @@ class D : A, B {
     }
 }
 
+/**
+ * E 实现 B 的同时继承 C
+ * */
+class E : B, C() {
+    override fun foo() {
+        // 注意到这里的调用可以是 B 或者 C 中的方法
+        super<C>.foo() // foo in A
+    }
+
+    override fun bar() {
+        super<B>.bar() // bar in B
+    }
+}
+
+fun main() {
+    E().foo()
+    E().bar()
+}
 
 object Interface {
 

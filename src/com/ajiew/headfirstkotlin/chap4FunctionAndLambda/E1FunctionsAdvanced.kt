@@ -1,7 +1,7 @@
 package com.ajiew.headfirstkotlin.chap4FunctionAndLambda
 
 /**
- * 高阶函数
+ * Kotlin 中的 function 是 first-class 的，限制较少，和 JS 类似，比如支持将函数当做变量或者参数传递等等。
  * https://www.kotlincn.net/docs/reference/lambdas.html
  * */
 
@@ -21,7 +21,7 @@ fun <T, R> Collection<T>.fold(
 }
 
 /**
- * 函数类型
+ * <bold>关于高阶函数的函数类型</bold>
  * Kotlin 使用类似 (Int) -> String 的一系列函数类型来处理函数的声明，
  * 这些类型具有与函数签名相对应的特殊表示法，即它们的参数和返回值:
  * - 所有函数类型都有一个圆括号括起来的参数类型列表以及一个返回类型：(A, B) -> C
@@ -34,16 +34,30 @@ typealias clickHandler = (name: String, event: String) -> Unit
 /**
  * 函数类型实例化
  * 1. 使用函数字面值的代码块
- * - lambda 表达式: { a, b -> a + b }
- * - 匿名函数: fun(s: String): Int { return s.toIntOrNull() ?: 0 }
+ * 1.1 lambda 表达式: { a, b -> a + b }
+ * 1.2 匿名函数: fun(s: String): Int { return s.toIntOrNull() ?: 0 }
  *
  * 2. 使用已有声明的可调用引用
- * - 顶层、局部、成员、扩展函数：::isOdd、 String::toInt
- * - 顶层、成员、扩展属性：List<Int>::size
- * - 构造函数：::Regex
+ * 2.1 顶层、局部、成员、扩展函数：::isOdd、 String::toInt
+ * 2.2 顶层、成员、扩展属性：List<Int>::size
+ * 2.3 构造函数：::Regex
  *
  * 3. 使用实现函数类型接口的自定义类的实例
  * */
+
+// 1.1
+val lambda = {
+    println("do something here")
+    "result"
+}
+
+// 1.2
+val anonymousMethod = fun(source: String): String {return "${source.capitalize()} - $source"}
+
+// 2.1
+val advancedCall = 47::toString
+
+// 3
 class IntTransformer : (Int) -> Int {
     override operator fun invoke(x: Int): Int = TODO()
 }
@@ -53,28 +67,35 @@ val intFunction: (Int) -> Int = IntTransformer()
 fun main() {
     val items = listOf(1, 2, 3, 4, 5)
 
-    // Lambdas 表达式是花括号括起来的代码块
+    // Lambdas 表达式
     items.fold(0, {
-        // 如果一个 lambda 表达式有参数，前面是参数，后跟“->”
+        // 1.1 如果一个 lambda 表达式有参数，前面是参数，后跟“->”
             acc: Int, i: Int ->
 
-        // 下面是函数主体
+        // 1.2 下面是函数主体
         print("acc = $acc, i = $i, ")
         val result = acc + i
         println("result = $result")
-        // lambda 表达式中的最后一个表达式是返回值：
+        // 1.3 lambda 表达式中的最后一个表达式是返回值：
         result
     }, "void")
 
-    // lambda 表达式的参数类型是可选的，如果能够推断出来的话
-    // 如果最后一个参数是 Lambda 表达式则可以把方法写在圆括号外面
+    // 2.1 lambda 表达式的参数类型是可选的，如果能够推断出来的话
+    // 2.2 如果最后一个参数是 Lambda 表达式则可以把方法写在圆括号外面
     val joinedToString = items.fold("Elements:") { acc, i -> "$acc $i" }
-
-    // 函数引用也可以用于高阶函数调用：
-    val product = items.fold(1, Int::times)
-
     println("joinedToString = $joinedToString")
-    println("product = $product")
 
+    val list = mutableListOf(1, 2 , 3)
+    // 2.3 lambda 函数中如果参数只有一个可以省略不写，并且使用 it 代替
+    list.removeAll { it > 2 }
+    println("list after remove: \n$list")
+
+    // 3.1 函数引用
     val stringPlus: (String, String) -> String = String::plus
+    var stringPlusResult = stringPlus("1", "2")
+    println("stringPlusResult: $stringPlusResult")
+
+    // 3.2 函数引用也可以用于高阶函数的调用中
+    val product = items.fold(1, Int::times)
+    println("product = ${product}")
 }

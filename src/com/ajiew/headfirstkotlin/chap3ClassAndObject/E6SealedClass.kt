@@ -30,5 +30,7 @@ object NotANumber : Expr() {
 
     @JvmStatic
     fun main(args: Array<String>) {
+        val eval = eval(Sum(Const(22.0), Const(23.0)))
+        println(eval)
     }
 }

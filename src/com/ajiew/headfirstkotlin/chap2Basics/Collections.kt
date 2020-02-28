@@ -41,9 +41,6 @@ fun showList() {
     println(readOnlyNumbers)
 }
 
-/**
- * 对于 List 来说协变是允许的，但是 MutableList 不是
- * */
 fun showCoherent() {
     println("--------------------------showCoherent--------------------------")
     val circles: List<Circle> = listOf(Circle("Sun"))
@@ -51,18 +48,21 @@ fun showCoherent() {
     shapes = circles
     println("shapes reassigned: $shapes")
 
-    // 对于可变集合类型这是不允许的
+    // 不可变集合类型不允许转换为可变集合类型
     // mutableShapes = circles
 
     // 但是可以往里面添加
     mutableShapes.add(Circle("Wheel"))
     println("mutable shapes after add: $mutableShapes")
 
+    // 转换成可变集合
+    mutableShapes = circles.toMutableList()
+
     /**
      * toList 扩展方法只是复制列表项
      * */
-    mutableShapes.toList()
-
+    val copied = mutableShapes.toList()
+    println(copied)
 }
 
 /**
@@ -113,12 +113,13 @@ fun showSet() {
  * */
 fun showMap() {
     println("--------------------------showMap--------------------------")
+    // 前面是 key 后面时 value
     val map = mapOf("one" to 1, "two" to 2, "three" to 3, 4 to "four")
 
-    println("map[4] = ${map[4]}")
+    println("map[one] = ${map["one"]}")
 
     /**
-     * 解构赋值
+     * 遍历 key value
      * */
     for ((key, value) in map) {
         println("map[$key] = $value")
@@ -139,6 +140,34 @@ fun testCollection() {
     for (shape in shapes) {
         println(shape)
     }
+
+    val s = listOf("Aaron", "Chen")
+    val joinToString = joinToString(s, "-", "Pre ", " Post")
+    println(joinToString)
+}
+
+fun <T> joinToString(collection: Collection<T>,
+                     separator: String = ", ",
+                     prefix: String = "",
+                     postfix: String = ""): String {
+    val result = StringBuilder(prefix)
+    for ((index, element) in collection.withIndex()) {
+        if (index > 0) result.append(separator)
+        result.append(element)
+    }
+    result.append(postfix)
+    return result.toString()
+}
+
+/**
+ * 使用 @JvmOverloads 来实现函数的重载，这样在 Java 中也可以调用
+ * */
+@JvmOverloads
+fun <T> joinToString2(collection: Collection<T>,
+                      separator: String = ", ",
+                      prefix: String = "PRE ",
+                      postfix: String = " POST"): String {
+    return joinToString(collection, separator, prefix, postfix)
 }
 
 open class Shape(val name: String) {

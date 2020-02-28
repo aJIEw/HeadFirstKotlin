@@ -32,10 +32,11 @@ class Property(name: String) {
         }
 
     var isEmpty = true
-        get() = this.size == 0
+//        get() = this.size == 0 // 修改 get 的实现
         set(value) {
             println("You have to set \"field\" manually to create a backing field")
-            // 如果不手动调用 field 会提醒不允许初始化属性，因为没有幕后字段。可以尝试注释掉下面这行：
+            // 如果不手动调用 field 会提醒不允许初始化属性，因为我们实现了初始化器但却没有使用幕后字段。
+            // 可以尝试注释掉下面这行：
             field = value
 
             /*
@@ -98,7 +99,9 @@ object PropertyAndField {
         println(p.isEmpty)
 
         println("try set isEmpty to true....")
-        p.isEmpty = true
+        p.isEmpty = false
+
+        // 修改 get 的实现再来看下面的值是否能修改成功
         println(p.isEmpty)
     }
 }

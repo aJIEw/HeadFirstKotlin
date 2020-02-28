@@ -1,3 +1,4 @@
 package com.ajiew.headfirstkotlin.chap1Start
 
-data class Customer(val name: String, val email: String)
+/* 数据类，快速创建 DTO */
+data class Customer(var name: String, var email: String)

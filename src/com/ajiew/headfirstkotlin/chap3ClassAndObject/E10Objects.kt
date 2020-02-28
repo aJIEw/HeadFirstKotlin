@@ -31,7 +31,7 @@ class AnonymousObject {
     var flag = 0
 
     /**
-     * 私有函数，所以其返回类型是匿名对象类型
+     * 在私有函数中返回匿名对象，其返回类型是匿名对象类型
      * */
     private fun foo() = object {
         val x: String = "x"
@@ -40,12 +40,13 @@ class AnonymousObject {
          * 就像 Java 匿名内部类一样，对象表达式中的代码可以访问来自包含它的作用域的变量。
          * */
         fun bar() {
+            println(x)
             flag++
         }
     }
 
     /**
-     * 公有函数，所以其返回类型是 Any
+     * 在公有函数中，其返回类型就变成了 Any
      * */
     fun publicFoo() = object {
         val x: String = "x"
@@ -85,5 +86,9 @@ object Objects {
         someFun()
 
         another.someFun()
+
+        println(AnonymousObject().publicFoo())
+
+        println(AnonymousObject().bar())
     }
 }

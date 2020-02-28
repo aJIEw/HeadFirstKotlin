@@ -47,7 +47,7 @@ fun printVararg(vararg strings: String) {
 }
 
 /**
- * 返回 Unit 的函数
+ * 返回 Unit 的函数，即没有返回值
  * 除此之外，所以函数必需显式指明返回类型
  * */
 fun returnNothing(name: String?): Unit {
@@ -84,7 +84,7 @@ fun demoLocalFun(name: String) {
     val sameSex = false
     // Kotlin 支持局部函数
     fun filter(age: Int) {
-        // 局部函数可以访问外部函数（即闭包）的局部变量 sameSex
+        // 局部函数可以访问外部函数（即闭包 closure）的局部变量 sameSex
         if (age < 18 || sameSex) return
         else {
             println("Hi, $name, let's do something dirty:P")
@@ -153,14 +153,17 @@ fun main() {
     // 命名参数：可以在调用函数时使用命名的函数参数，有利于增强代码的可读性
     foo(bar = 22, baz = 33) { println("do nothing") } // 注意：如果使用了命名参数，则只有第一个命名参数可省略
 
-    printVararg("Aaron", "is", "very", "cute")
+    printVararg("Kotlin", "is", "so", "cool")
     // 也可使用星号操作符（即扩展表达式）将可变数量参数（vararg）以命名形式传入
     printVararg(strings = *arrayOf("a", "b", "c"))
-    printVararg("x", "y", "z")
 
     // 可变参数列表支持使用扩展表达式，数组前加 *
-    val arr = arrayOf("some", "content")
-    printVararg(*arr, "and", "more")
+    val arrCalculated = arrayOf("Hello", "world").apply {
+        println("preparing data..")
+        plus("!!")
+    }
+    println()
+    printVararg(*arrCalculated, "and", "more")
 
     returnNothing(null)
 

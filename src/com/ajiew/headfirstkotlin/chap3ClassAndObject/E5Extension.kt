@@ -8,22 +8,23 @@ package com.ajiew.headfirstkotlin.chap3ClassAndObject
 /**
  * 扩展一般写在顶层，我们可以通过通过扩展给一些类添加一些 Util 方法等
  * */
+
+/**
+ * 扩展 MutableList 添加一个 swap 方法
+ * */
+fun <T> MutableList<T>.swap(index1: Int, index2: Int) {
+    val tmp = this[index1]
+    this[index1] = this[index2]
+    this[index2] = tmp
+}
+
+/**
+ * 扩展属性
+ * */
+val <T> List<T>.listLastIndex: Int
+    get() = size - 1
+
 object Extension {
-
-    /**
-     * 扩展 MutableList 添加一个 swap 方法
-     * */
-    fun <T> MutableList<T>.swap(index1: Int, index2: Int) {
-        val tmp = this[index1]
-        this[index1] = this[index2]
-        this[index2] = tmp
-    }
-
-    /**
-     * 扩展属性
-     * */
-    val <T> List<T>.lastIndex: Int
-        get() = size - 1
 
     @JvmStatic
     fun main(args: Array<String>) {
@@ -38,7 +39,7 @@ object Extension {
         /**
          * 调用扩展属性
          * */
-        println("last index is ${list.lastIndex}")
+        println("last index is ${list.listLastIndex}")
 
         /**
          * 调用的永远是 ExtensionA 中的扩展函数

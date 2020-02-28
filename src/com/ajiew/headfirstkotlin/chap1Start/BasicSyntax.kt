@@ -34,8 +34,10 @@ object BasicSyntax {
      * */
     @JvmStatic
     fun main(args: Array<String>) {
-        // 以上等同于
-        // fun main(vararg args: String) { // vararg means variable arguments 即 Java 中的可变参数列表
+    // 以上等同于
+    //fun main(vararg args: String) {
+    // vararg means variable arguments 即 Java 中的可变参数列表
+
         out()
 
         // this is line comment
@@ -112,6 +114,8 @@ object BasicSyntax {
         // 模板中的任意表达式：
         val s2 = "${s1.replace("$a", "b")}, but now is $a"
         println(s2)
+        // 只有这样才能替换成功，说明不支持动态替换？
+        println(s1.replace("1", "b"))
     }
 
     fun useIs(obj: Any): Int? {
@@ -163,7 +167,7 @@ object BasicSyntax {
     }
 
     fun useDataClass() {
-        val customer = Customer("aaron", "kevin10tod@gmail.com")
+        val customer = Customer("aJIEw", "ajiew42@gmail.com")
         println("Customer: name = ${customer.name}, email = ${customer.email}")
     }
 }

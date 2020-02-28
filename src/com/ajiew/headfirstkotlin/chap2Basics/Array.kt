@@ -43,7 +43,7 @@ fun testArray() {
     val sortedArrayDescending = names.sortedArrayDescending()
     println("sortedArrayDescending: ${sortedArrayDescending.toList()}")
     val sorted: Any = names.sorted()
-    println("sorted: $sorted") // kotlin.collections 中的方法，转换为排序后的 List
+    println("sortedList: $sorted") // kotlin.collections 中的方法，转换为排序后的 List
 
     // 复制
     val copy = names.copyOf()
