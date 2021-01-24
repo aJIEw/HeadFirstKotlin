@@ -126,10 +126,7 @@ class GroceryStore : Store() {
 
 open class BaseClass(val name: String) {
 
-    init {
-        println("Initializing Base")
-    }
-
+    init { println("Initializing Base") }
     open val size: Int =
         name.length.also { println("Initializing size in Base: $it") }
 
@@ -143,10 +140,7 @@ class DerivedClass(
     val lastName: String
 ) : BaseClass(name.capitalize().also { println("Argument for Base: $it") }) {
 
-    init {
-        println("Initializing Derived")
-    }
-
+    init { println("Initializing Derived") }
     override val size: Int =
         (super.size + lastName.length).also { println("Initializing size in Derived: $it") }
 

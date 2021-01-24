@@ -15,8 +15,10 @@ public class CallByJava {
             add(4);
             add(0);
         }};
-        String res = CollectionsKt.joinToString2(arr, "-");
+        // 没有 @JvmOverloads 注解的方法，不能使用默认参数
+        String res = CollectionsKt.joinToString(arr, "-", "pre-", "-post");
         System.out.println(res);
+        // 使用 @JvmOverloads 后会为我们自动生成对应的重载方法，所以可以在 Java 中调用
         String res2 = CollectionsKt.joinToString2(arr, "-", "=>");
         System.out.println(res2);
     }

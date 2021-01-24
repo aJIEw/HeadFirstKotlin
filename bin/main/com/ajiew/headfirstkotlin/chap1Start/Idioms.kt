@@ -50,7 +50,6 @@ var cat = Customer("Cat", "cat@cat.com")
 fun useMap() {
     println("--------------use mapOf--------------")
     val map = mapOf("a" to 1, "b" to 2, "c" to 3)
-    mapOf(1 to "c")
     println("map[c] = " + map["c"])
 }
 
