@@ -96,12 +96,12 @@ fun main() {
     user.name = "first"
     user.name = "second"
 
-    println(student.name) // Prints "John Doe"
+    println(student.name) // Prints "Aaron Chen"
     println(student.age)  // Prints 25
 
-    val content = mutableMapOf(
-        "name" to "Aaron Chen",
-        "age" to 24)
-    var mStu = MutableStudent(content)
+    val content = mutableMapOf<String, Any>()
+    content["name"] = "Aaron"
+    content["age"] = 26
+    val mStu = MutableStudent(content)
     println("name: ${mStu.name}, age: ${mStu.age}")
 }

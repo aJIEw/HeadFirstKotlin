@@ -28,4 +28,26 @@ fun showIt() {
 
 fun main() {
     showIt()
+
+    // 函数作为参数
+    fun a(p: String, m: (s: String) -> Unit) {
+        println("called in a()")
+        val modifiedP = "$p++"
+        m(modifiedP)
+    }
+
+    fun b() {
+        println("called in b()")
+    }
+
+    // 引用函数
+    val c = ::b
+    val d = ::b
+    println(c == d)
+
+    // lambda 本质上函数类型的对象，并且可以使用 trailing lambda 语法
+    a("a") {
+        // 省略参数名、返回值
+        println("did something with $it")
+    }
 }

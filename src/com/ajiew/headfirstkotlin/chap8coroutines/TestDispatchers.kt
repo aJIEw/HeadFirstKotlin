@@ -22,6 +22,11 @@ fun main() = runBlocking<Unit> {
 
     // main CoroutineScope 可以放到全局，便于统一管理
     var mainScope = MainScope()
+
+    val scope = CoroutineScope(CoroutineName("Name") + Dispatchers.IO)
+    val job = scope.launch(start = CoroutineStart.DEFAULT){
+        println("hello world")
+    }
 }
 
 // 这是你的第一个挂起函数

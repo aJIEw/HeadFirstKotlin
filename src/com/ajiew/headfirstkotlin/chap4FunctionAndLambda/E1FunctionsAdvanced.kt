@@ -52,7 +52,7 @@ val lambda = {
     "result"
 }
 
-fun specialFun(p1: Int, p2: Int, calculator: (a:Int, b:Int) -> Int) : Int {
+fun specialFun(p1: Int, p2: Int, calculator: (a: Int, b: Int) -> Int): Int {
     println("Before calculation:")
     val result = calculator(p1, p2)
     println("After calculation:")
@@ -86,15 +86,14 @@ fun main() {
     println()
 
     // Lambdas 表达式
-    items.fold(0, {
-        // 1.1 如果一个 lambda 表达式有参数，前面是参数，后跟“->”
-            acc: Int, i: Int ->
+    items.fold(0, { acc: Int, i: Int -> // 1.1 如果一个 lambda 表达式有参数，前面是参数，后跟“->”
 
         // 1.2 下面是函数主体
         print("acc = $acc, i = $i, ")
         val result = acc + i
         println("result = $result")
-        // 1.3 lambda 表达式中的最后一个表达式是返回值：
+
+        // 1.3 lambda 表达式中的最后一个表达式是返回值
         result
     }, "void")
     println()
@@ -112,6 +111,7 @@ fun main() {
     println()
 
     // 3.1 函数引用
+    // 这里定义了一个函数 stringPlus，它引用 String 的 plus 方法作为实现
     val stringPlus: (String, String) -> String = String::plus
     var stringPlusResult = stringPlus("1", "2")
     println("stringPlusResult: $stringPlusResult")

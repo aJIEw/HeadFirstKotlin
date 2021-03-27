@@ -12,7 +12,7 @@ import kotlin.random.Random
  * 一般原则是：当一个类 Class 的类型参数 T 被声明为 out 时，它就只能出现在 Class 的成员的输出-位置，
  * 但回报是 Class<Base> 可以安全地作为 Class<Derived>的超类。你可以认为 Class 是 T 的生产者，而不是 T 的消费者。
  * */
-interface Source<out T> {
+interface Source<out T> { // 相当于 Java 中的 ? extends 上界通配符
     fun nextT(): T
 }
 
@@ -30,7 +30,7 @@ fun demo(strs: Source<String>) {
 /**
  * Kotlin 还有一个型变注释：in。它使得一个类型参数逆变：只可以被消费而不可以被生产。
  * */
-interface Comparable<in T> {
+interface Comparable<in T> {  // 相当于 Java 中的 ? super 下界通配符
     operator fun compareTo(other: T): Int
 }
 
